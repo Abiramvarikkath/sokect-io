@@ -1,0 +1,98 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 900px;
+  margin: auto;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+
+  .chat-title {
+    background: #075e54;
+    color: white;
+    padding: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .chat-message {
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      word-wrap: break-word;
+
+      &.mine {
+        align-self: flex-end;
+        background: #dcf8c6;
+        border-bottom-right-radius: 5px;
+      }
+
+      &.theirs {
+        align-self: flex-start;
+        background: white;
+        border-bottom-left-radius: 5px;
+      }
+    }
+  }
+
+  .chat-input-container {
+    display: flex;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #ddd;
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      background: #f1f1f1;
+      outline: none;
+    }
+
+    button {
+      margin-left: 15px;
+      padding: 10px 20px;
+      background: #25d366;
+      color: rgb(6, 5, 5);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 30px;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: #1ebc57;
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .chat-container {
+    .chat-messages .chat-message {
+      max-width: 85%;
+    }
+    .chat-title {
+      font-size: 1rem;
+    }
+    .chat-input-container {
+      input {
+        font-size: 0.9rem;
+      }
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
