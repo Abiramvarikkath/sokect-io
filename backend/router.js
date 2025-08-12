@@ -10,4 +10,6 @@ router.route('/listuser').get(Auth,user.Listuser)
 router.route('/nav').get(Auth,user.Nav)
 router.post('/message', Auth, user.sendMessage)
 router.get('/messages/:otherUserId', Auth, user.getMessages)
+
+router.get('/chatlist', Auth, user.getChatList);
 export default router;

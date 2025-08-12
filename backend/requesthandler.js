@@ -126,3 +126,31 @@ export const getMessages = async (req,res) => {
     res.json(message);
     
 };
+
+export const  getChatList = async (req, res) => {
+    try {
+        const currentUserId = req.user.userId;
+        console.log('Current User ID:' , currentUserId);
+
+        const messages = await Message.find({
+            $or: [{ senderId: currentUserId }, { receiverId: currentUserId }],
+        });
+
+        const participantIds = new Set();
+        messages.forEach((msg) =>{
+            if (msg.senderId.toString() !== currentUserId) participantIds.add(msg.senderId.toString());
+            if (msg.receiverId.toString() !== currentUserId) participantIds.add(msg.receiverId.toString());
+
+        });
+
+        const ids = Array.from(participantIds);
+
+        const users = await userSchema.find({ _id: { $in: ids } }).select('-password');
+
+        res.json({ chatList: users });
+    } catch (error) {
+        console.error('Error in getchatList:', error);
+        res.status(500).json({ msg: 'Server error'});
+        
+    }
+;}
